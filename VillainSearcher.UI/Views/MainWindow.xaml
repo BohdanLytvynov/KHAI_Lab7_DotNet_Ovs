@@ -1,0 +1,101 @@
+﻿<Window x:Class="VillainSearcher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VillainSearcher"
+        mc:Ignorable="d"
+        xmlns:mainvm="clr-namespace:VillainSearcher.ViewModels"
+        Height="450" Width="800"
+        MinHeight="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Height, UpdateSourceTrigger=PropertyChanged}"
+        MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Width, UpdateSourceTrigger=PropertyChanged}"
+        Title="{Binding Title}"
+        d:DataContext="{d:DesignInstance mainvm:MainWindowViewModel,
+        IsDesignTimeCreatable=True}">
+    <Grid x:Name="main">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Rectangle Grid.Row="1" Fill="{StaticResource BordersBrush}"/>
+        <Rectangle Grid.Row="3" Fill="{StaticResource BordersBrush}"/>
+        <Menu Grid.Row="0">
+            <MenuItem Header="File" Style="{StaticResource MenuItemStyle }"
+                      Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Menu}, Path=ActualHeight}">
+                <MenuItem Header="Load Data" Style="{StaticResource MenuItemStyle }"
+                            Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Menu}, Path=ActualHeight}"
+                          Command="{Binding OnLoadDataButtonPressed}">
+                </MenuItem>
+
+                <MenuItem Header="Save Data" Style="{StaticResource MenuItemStyle }"
+            Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Menu}, Path=ActualHeight}"
+          Command="{Binding OnSaveButtonPressed}">
+                </MenuItem>
+
+                <MenuItem Header="Add Voter" Style="{StaticResource MenuItemStyle }"
+            Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Menu}, Path=ActualHeight}"
+          Command="{Binding OnAddButtonPressed}">
+                </MenuItem>
+
+                <MenuItem Header="Generate Report" Style="{StaticResource MenuItemStyle }"
+  Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Menu}, Path=ActualHeight}"
+Command="{Binding OnGenerateReportPressed}">
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="About" Style="{StaticResource MenuItemStyle}"
+                      Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Menu}, Path=ActualHeight}"
+                      Command="{Binding OnAboutButtonPressed}"
+                      >
+            </MenuItem>
+        </Menu>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="123*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="34*"/>
+            </Grid.ColumnDefinitions>
+            <GridSplitter Grid.Column="1" Style="{StaticResource VerticalGridSplitter}"/>
+            <Grid x:Name="Right" Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Style="{StaticResource MenuStackStyle}"
+                            Grid.Column="1"
+                            Grid.Row="1">
+                    <Button Style="{StaticResource MenuButton}" Content="Search"
+                            Command="{Binding OnGenerateReportPressed}"/>
+                    <Button Style="{StaticResource MenuButton}" Content="Load Data" 
+                            Command="{Binding OnLoadDataButtonPressed}"/>
+                    <Button Style="{StaticResource MenuButton}" Content="Save Data"
+                            Command="{Binding OnSaveButtonPressed}"/>
+                    <Button Style="{StaticResource MenuButton}" Content="Add Villain"
+                            Command="{Binding OnAddButtonPressed}"/>
+                    <Button Style="{StaticResource MenuButton}" Content="Edit Villain"
+                            Command="{Binding OnEditButtonPressed}"/>
+                    <Button Style="{StaticResource MenuButton}" Content="Remove Villain"
+                            Command="{Binding OnRemoveButtonPressed}"/>
+                </StackPanel>
+            </Grid>
+            <Grid x:Name="Left">
+                <ListView Style="{StaticResource ListView}" 
+                          ItemsSource="{Binding Villains, 
+                    UpdateSourceTrigger=PropertyChanged, 
+                    Mode=TwoWay}"
+                    SelectedIndex="{Binding SelectedVillainIndex, 
+                    UpdateSourceTrigger=PropertyChanged, 
+                    Mode=TwoWay}"
+                          />
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
