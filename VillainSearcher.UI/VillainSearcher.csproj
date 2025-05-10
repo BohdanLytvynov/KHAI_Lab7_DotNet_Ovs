@@ -74,6 +74,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Enums\Action.cs" />
+    <Compile Include="Mappings\Villains\VillainProfile.cs" />
     <Compile Include="ViewModels\Base\Commands\Command.cs" />
     <Compile Include="ViewModels\Base\Commands\CommandBase.cs" />
     <Compile Include="ViewModels\Base\VM\ViewModelBase.cs" />

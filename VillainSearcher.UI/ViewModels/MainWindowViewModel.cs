@@ -101,7 +101,7 @@ namespace VillainSearcher.ViewModels
 
             m_selectedVillainIndex = -1;
 
-            #endregion
+            #endregion 
 
             #region Init Commands
             OnLoadDataButtonPressed = new Command(
