@@ -12,7 +12,10 @@ namespace VillianSearcher.BLL.Validators
         {
             error = string.Empty;
 
-            if (string.IsNullOrEmpty(value)) return false;
+            if (!ValidateEmptyText(value, out error))
+            { 
+                return false;
+            }
 
             if (value.Equals(defValue))
             {
@@ -57,7 +60,10 @@ namespace VillianSearcher.BLL.Validators
         {
             error = string.Empty;
 
-            if (string.IsNullOrEmpty(value)) return false;
+            if (!ValidateEmptyText(value, out error))
+            {
+                return false;
+            }
 
             if (value.Equals(defValue))
             {
@@ -71,6 +77,14 @@ namespace VillianSearcher.BLL.Validators
             {
                 if (!Char.IsDigit(value[i]))
                 {
+                    if (value[i].Equals('.'))
+                    {
+                        error = "Please use ',' instead of '.'!";
+                        return false;
+                    }
+                    else if (value[i].Equals(','))
+                        continue;
+
                     error = $"Symbol in position {i + 1} is not a digit!";
                     return false;
                 }
@@ -82,7 +96,11 @@ namespace VillianSearcher.BLL.Validators
         public static bool ValidateText(string value, out string error, string defValue = "enter smth")
         {
             error = string.Empty;
-            if (string.IsNullOrEmpty(value)) return false;
+
+            if (!ValidateEmptyText(value, out error))
+            {
+                return false;
+            }
 
             if (value.Equals(defValue))
             {
@@ -98,6 +116,19 @@ namespace VillianSearcher.BLL.Validators
                     error = $"Incorrect symbol at: {i + 1}!";
                     return false;
                 }
+            }
+
+            return true;
+        }
+
+        public static bool ValidateEmptyText(string value, out string error)
+        {
+            error = string.Empty;
+
+            if (string.IsNullOrEmpty(value))
+            {
+                error = "Input is Empty!";
+                return false;
             }
 
             return true;

@@ -6,7 +6,9 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using VillainSearcher.ViewModels;
+using VillainSearcher.Views;
 using VillainSearcher.WindowManagers;
+using VillianSearcher.BLL.DeviationCalculator;
 using VillianSearcher.DAL.Data;
 using VillianSearcher.DAL.Repositories;
 using VillianSearcher.DAL.RepositoryWrappers;
@@ -41,10 +43,11 @@ namespace VillainSearcher
             services.AddSingleton<IRepositoryWrapper, RepositoryWrapper>();
             
             services.AddSingleton<IWindowManager, WindowManager>();
-
+            services.AddSingleton<VillainDeviationCalculator>();
 
             services.AddSingleton<MainWindowViewModel>();
-           
+            services.AddScoped<SearchWindowViewModel>();
+
             services.AddSingleton(c =>
             {
                 var vm = c.GetRequiredService<MainWindowViewModel>();
@@ -56,21 +59,21 @@ namespace VillainSearcher
                 return mainwindow;
             });
 
-            //services.AddTransient(c =>
-            //{
-            //    var scope = c.CreateScope();
+            services.AddTransient(c =>
+            {
+                var scope = c.CreateScope();
 
-            //    var repWindow = new ReporterWindow();
-            //    var vm = scope.ServiceProvider.GetRequiredService<ReporterWindowViewModel>();
-            //    repWindow.DataContext = vm;
-            //    vm.Dispatcher = repWindow.Dispatcher;
-            //    repWindow.Closed += (object sender, EventArgs e) =>
-            //    {
-            //        scope.Dispose();
-            //    };
+                var repWindow = new SearchWindow();
+                var vm = scope.ServiceProvider.GetRequiredService<SearchWindowViewModel>();
+                repWindow.DataContext = vm;
+                vm.Dispatcher = repWindow.Dispatcher;
+                repWindow.Closed += (object sender, EventArgs e) =>
+                {
+                    scope.Dispose();
+                };
 
-            //    return repWindow;
-            //});
+                return repWindow;
+            });
 
             //Mapper configuration
             var mapperConfig = new MapperConfiguration(mc =>

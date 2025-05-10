@@ -61,5 +61,16 @@ namespace VillianSearcher.DAL.Models
 
         #endregion
 
+        #region Methods
+
+        public override string ToString()
+        {
+            return $"{Surename} | Height: {Height} \n" +
+                $"| Head:( W: {HeadWidth}, H: {HeadHeight} ) \n" +
+                $"| ArmLength:{ArmLength} | EyeDistance:{EyeDistance}";
+        }
+
+        #endregion
+
     }
 }

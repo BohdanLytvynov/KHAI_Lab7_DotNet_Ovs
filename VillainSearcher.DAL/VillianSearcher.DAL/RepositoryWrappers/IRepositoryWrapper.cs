@@ -9,7 +9,7 @@ namespace VillianSearcher.DAL.RepositoryWrappers
 {
     public interface IRepositoryWrapper
     {
-        IVillainRepository VoterRepository { get; }
+        IVillainRepository VillainRepository { get; }
 
         void LoadData();
 

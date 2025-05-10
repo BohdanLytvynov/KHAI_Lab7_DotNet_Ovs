@@ -14,7 +14,7 @@ namespace VillianSearcher.DAL.RepositoryWrappers
 
         private IVillainRepository m_VoterRepository;
 
-        public IVillainRepository VoterRepository
+        public IVillainRepository VillainRepository
         {
             get
             {

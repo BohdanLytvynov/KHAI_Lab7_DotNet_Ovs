@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviationCalculator\DeviationCalculatorBase.cs" />
+    <Compile Include="DeviationCalculator\IDeviationCalculator.cs" />
+    <Compile Include="DeviationCalculator\VillainDeviationCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\ValidationHelper.cs" />
   </ItemGroup>
@@ -49,6 +52,9 @@
       <Project>{21eef8cd-123c-4e46-b7b8-b2a138ec34ed}</Project>
       <Name>VillianSearcher.DAL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

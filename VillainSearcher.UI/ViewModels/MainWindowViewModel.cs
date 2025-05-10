@@ -15,6 +15,7 @@ using VillainSearcher.ViewModels.Model;
 using VillianSearcher.DAL.Models;
 using VillainSearcher.Enums;
 using Action = VillainSearcher.Enums.Action;
+using VillainSearcher.Views;
 
 namespace VillainSearcher.ViewModels
 {
@@ -85,7 +86,7 @@ namespace VillainSearcher.ViewModels
 
             m_windowManager = windowManager;
 
-            var votersData = m_repWrapper.VoterRepository.GetAll();
+            var votersData = m_repWrapper.VillainRepository.GetAll();
 
             m_Villains = new ObservableCollection<VillainViewModel>();
 
@@ -148,7 +149,7 @@ namespace VillainSearcher.ViewModels
         {
             m_repWrapper.LoadData();
 
-            var voters = m_repWrapper.VoterRepository.GetAll();
+            var voters = m_repWrapper.VillainRepository.GetAll();
 
             if (Villains.Count > 0)
                 Villains.Clear();
@@ -163,7 +164,7 @@ namespace VillainSearcher.ViewModels
 
         private void OnSaveButtonPressedExecute(object p)
         {
-            var repo = m_repWrapper.VoterRepository;
+            var repo = m_repWrapper.VillainRepository;
 
             foreach (VillainViewModel v in Villains)
             {
@@ -232,11 +233,11 @@ namespace VillainSearcher.ViewModels
 
         #region On Generate Report Button Pressed
 
-        private bool CanOnGenerateReportButtonPressedExecute(object p) => Villains.Count > 0;
+        private bool CanOnGenerateReportButtonPressedExecute(object p) => true;
 
         private void OnGenerateReportButtonPressedExecute(object p)
         {
-            
+            m_windowManager.OpenWindow(typeof(SearchWindow));
         }
 
         #endregion
