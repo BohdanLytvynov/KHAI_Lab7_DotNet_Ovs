@@ -30,8 +30,7 @@ namespace VillainSearcher.ViewModels
         private ObservableCollection<VillainViewModel> m_SearchResult;
 
         private int m_SelectedVillainIndex;
-
-        private string m_Surename;
+        
         private string m_Height;
         private string m_HeadWidth;
         private string m_HeadHeight;
@@ -65,13 +64,7 @@ namespace VillainSearcher.ViewModels
             get => m_SelectedVillainIndex;
             set => Set(ref m_SelectedVillainIndex, value);
         }
-
-        public string Surename
-        {
-            get => m_Surename;
-            set => Set(ref m_Surename, value);
-        }
-
+        
         public string Height
         {
             get => m_Height;
@@ -108,11 +101,6 @@ namespace VillainSearcher.ViewModels
             set 
             {
                 Set(ref m_Threshold, value);
-
-                if (m_InputValid)
-                { 
-                    m_SearchTask.Start();
-                }
             }
         }
 
@@ -133,24 +121,21 @@ namespace VillainSearcher.ViewModels
                 string error = string.Empty;
 
                 switch (columnName)
-                {
-                    case nameof(Surename):
-                        SetValidArrayValue(0, ValidationHelper.IsNSLValid(Surename, out error));
-                        break;
+                {                   
                     case nameof(Height):
-                        SetValidArrayValue(1, ValidationHelper.ValidateNumber(Height, out error));
+                        SetValidArrayValue(0, ValidationHelper.ValidateNumber(Height, out error));
                         break;
                     case nameof(HeadWidth):
-                        SetValidArrayValue(2, ValidationHelper.ValidateNumber(HeadWidth, out error));
+                        SetValidArrayValue(1, ValidationHelper.ValidateNumber(HeadWidth, out error));
                         break;
                     case nameof(HeadHeight):
-                        SetValidArrayValue(3, ValidationHelper.ValidateNumber(HeadHeight, out error));
+                        SetValidArrayValue(2, ValidationHelper.ValidateNumber(HeadHeight, out error));
                         break;
                     case nameof(ArmLength):
-                        SetValidArrayValue(4, ValidationHelper.ValidateNumber(ArmLength, out error));
+                        SetValidArrayValue(3, ValidationHelper.ValidateNumber(ArmLength, out error));
                         break;
                     case nameof(EyeDistance):
-                        SetValidArrayValue(5, ValidationHelper.ValidateNumber(EyeDistance, out error));
+                        SetValidArrayValue(4, ValidationHelper.ValidateNumber(EyeDistance, out error));
                         break;
                 }
 
@@ -176,7 +161,7 @@ namespace VillainSearcher.ViewModels
             m_repositoryWrapper = repositoryWrapper;
         }
 
-        public SearchWindowViewModel() : base(6)
+        public SearchWindowViewModel() : base(5)
         {
             #region Init fields
             m_title = "Villain Searcher Search";
@@ -192,8 +177,7 @@ namespace VillainSearcher.ViewModels
             m_SearchTask = new Task(DoSearch);
 
             m_searching = false;
-
-            m_Surename = string.Empty;
+            
             m_Height = string.Empty;
             m_HeadWidth = string.Empty;
             m_HeadHeight = string.Empty;
@@ -234,7 +218,7 @@ namespace VillainSearcher.ViewModels
 
             var villains = repo.GetAll();
 
-            VillainViewModel villainViewModel = new VillainViewModel(-1, Surename,
+            VillainViewModel villainViewModel = new VillainViewModel(-1, "",
                 Height, HeadWidth, HeadHeight, ArmLength, EyeDistance);
 
             var villainRef = m_mapper.Map<Villain>(villainViewModel);

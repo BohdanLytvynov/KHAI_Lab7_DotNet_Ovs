@@ -47,18 +47,7 @@
                     <ColumnDefinition Width="10"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Style="{StaticResource MenuStackStyle}">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Enter Surename: "/>
-                        <TextBox MinWidth="100" Style="{StaticResource TxtBoxInputStyle}">
-                            <TextBox.Text>
-                                <Binding Path="Surename" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                        <DataErrorValidationRule/>
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-                    </StackPanel>
+                    
 
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Enter Height: "/>
@@ -129,12 +118,18 @@
                         <TextBlock Text="Threshold:"/>
                         <Slider x:Name="ThresholdSlider" 
                                 Value="{Binding Threshold, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                Maximum="1000"
+                                Minimum="0.0001"
+                                TickFrequency="0.0001"
+                                TickPlacement="BottomRight"
+                                
                                 />
-                        <Label HorizontalAlignment="Center" Content="{Binding ElementName=ThresholdSlider, Path=Value, 
-                            UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Text="{Binding ElementName=ThresholdSlider, Path=Value,
+                            UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </StackPanel>
 
-                    <Button Content="Search" Margin="30,10"/>
+                    <Button Content="Search" Margin="30,10"
+                            Command="{Binding OnSearchButtonPressed}"/>
                 </StackPanel>
             </Grid>
 
