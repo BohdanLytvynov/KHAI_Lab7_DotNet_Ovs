@@ -198,7 +198,7 @@ namespace VillainSearcher.ViewModels
 
         #region On Search Button Pressed
 
-        private bool CanOnSearchButtonPressedExecute(object p) => m_InputValid;
+        private bool CanOnSearchButtonPressedExecute(object p) => m_InputValid && !m_searching;
 
         private void OnSearchButtonPressedExecute(object p)
         {
