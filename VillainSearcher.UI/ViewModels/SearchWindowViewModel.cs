@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using VillainSearcher.ViewModels.Base.Commands;
 using VillainSearcher.ViewModels.Base.VM;
@@ -44,6 +46,8 @@ namespace VillainSearcher.ViewModels
         private Task m_SearchTask;
 
         private bool m_searching;
+
+        private string m_output;
         #endregion
 
         #region Properties
@@ -102,6 +106,12 @@ namespace VillainSearcher.ViewModels
             {
                 Set(ref m_Threshold, value);
             }
+        }
+
+        public string Output 
+        {
+            get=> m_output;
+            set=>Set(ref m_output, value);
         }
 
         #endregion
@@ -183,6 +193,8 @@ namespace VillainSearcher.ViewModels
             m_HeadHeight = string.Empty;
             m_ArmLength = string.Empty;
             m_EyeDistance = string.Empty;
+
+            m_output = string.Empty;
             #endregion
 
             #region Init Commands
@@ -228,21 +240,44 @@ namespace VillainSearcher.ViewModels
                 Dispatcher.Invoke(() =>
                 {
                     SearchResult.Clear();
-                });                
+                });
             }
             
+            Dispatcher.Invoke(() => { Output = string.Empty;  });
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            stringBuilder.AppendLine("Output:");
+            int i = 1;
             foreach (var villain in villains)
             {
-                if (m_villainDeviationCalculator.GetDeviationPercentage(villainRef, villain) <= Threshold)
+                var deviation = m_villainDeviationCalculator.GetDeviationPercentage(villainRef, villain);
+
+                if (deviation <= Threshold)
                 {
                     Dispatcher.Invoke(() =>
                     {
                         SearchResult.Add(m_mapper.Map<VillainViewModel>(villain));
                     });
                 }
+
+                stringBuilder.AppendLine($"\t{i}) {villain.Surename}, deviation: {deviation}\n");
+
+                Dispatcher.Invoke(() =>
+                {
+                    Output += stringBuilder.ToString();
+                });
+
+                stringBuilder.Clear();
+                ++i;
             }
 
+            if (SearchResult.Count == 0)
+                MessageBox.Show("No Villains were found!", Title, MessageBoxButton.OK, MessageBoxImage.Information);
+
             m_searching = false;
+
+            m_SearchTask = new Task(DoSearch);
         }
 
         #endregion

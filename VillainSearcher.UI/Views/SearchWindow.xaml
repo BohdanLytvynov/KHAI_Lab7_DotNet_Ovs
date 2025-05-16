@@ -47,7 +47,7 @@
                     <ColumnDefinition Width="10"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Style="{StaticResource MenuStackStyle}">
-                    
+
 
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Enter Height: "/>
@@ -134,12 +134,24 @@
             </Grid>
 
             <Grid x:Name="Right" Grid.Column="2">
-                <ListView Style="{StaticResource ListView}"
-                          ItemsSource="{Binding SearchResult,
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="23*"/>
+                        <RowDefinition Height="7"/>
+                        <RowDefinition Height="7*"/>
+                    </Grid.RowDefinitions>
+                    <ListView Style="{StaticResource ListView}"
+                    ItemsSource="{Binding SearchResult,
                     UpdateSourceTrigger=PropertyChanged,
                     Mode=TwoWay}"
-                          SelectedIndex="{Binding SelectedVillainIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                          />
+                    SelectedIndex="{Binding SelectedVillainIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    />
+                    
+                    <GridSplitter Grid.Row="1" Style="{StaticResource HorizontalGridSplitter}"/>
+                    <TextBlock Margin="5" Grid.Row="2" Text="{Binding Output, UpdateSourceTrigger=PropertyChanged}"
+                               FontSize="20" TextWrapping="WrapWithOverflow"
+                               />
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

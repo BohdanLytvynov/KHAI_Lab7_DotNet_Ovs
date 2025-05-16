@@ -22,7 +22,7 @@ namespace VillianSearcher.BLL.DeviationCalculator
         {
             double avg = (p1 + p2) / 2;
 
-            return Math.Abs(p1 - p2) / avg * 100;
+            return Math.Abs(p1 - p2) / avg;
         }
     }
 }
