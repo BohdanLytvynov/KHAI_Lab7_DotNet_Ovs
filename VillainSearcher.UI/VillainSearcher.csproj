@@ -73,13 +73,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\DoubleFormater.cs" />
     <Compile Include="Enums\Action.cs" />
     <Compile Include="Mappings\Villains\VillainProfile.cs" />
     <Compile Include="ViewModels\Base\Commands\Command.cs" />
     <Compile Include="ViewModels\Base\Commands\CommandBase.cs" />
+    <Compile Include="ViewModels\Base\VM\InteractableModel.cs" />
+    <Compile Include="ViewModels\Base\VM\Interfaces\IInteractable.cs" />
+    <Compile Include="ViewModels\Base\VM\Interfaces\IValidatable.cs" />
+    <Compile Include="ViewModels\Base\VM\ValidatableModel.cs" />
     <Compile Include="ViewModels\Base\VM\ViewModelBase.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\Model\VillainViewModel.cs" />
+    <Compile Include="ViewModels\Model\VillianResultViewModel.cs" />
     <Compile Include="ViewModels\Model\VisualModelBase.cs" />
     <Compile Include="ViewModels\SearchWindowViewModel.cs" />
     <Compile Include="Views\SearchWindow.xaml.cs">

@@ -136,21 +136,17 @@
             <Grid x:Name="Right" Grid.Column="2">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="23*"/>
-                        <RowDefinition Height="7"/>
-                        <RowDefinition Height="7*"/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <ListView Style="{StaticResource ListView}"
+                    <ListView Grid.Row="0" Style="{StaticResource ListView}"
+                              Margin="20"
+                              BorderBrush="Black"
+                              BorderThickness="2"
                     ItemsSource="{Binding SearchResult,
                     UpdateSourceTrigger=PropertyChanged,
                     Mode=TwoWay}"
                     SelectedIndex="{Binding SelectedVillainIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                     />
-                    
-                    <GridSplitter Grid.Row="1" Style="{StaticResource HorizontalGridSplitter}"/>
-                    <TextBlock Margin="5" Grid.Row="2" Text="{Binding Output, UpdateSourceTrigger=PropertyChanged}"
-                               FontSize="20" TextWrapping="WrapWithOverflow"
-                               />
                 </Grid>
             </Grid>
         </Grid>

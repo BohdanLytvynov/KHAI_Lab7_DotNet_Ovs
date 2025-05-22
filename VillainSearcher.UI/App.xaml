@@ -382,6 +382,131 @@
 
         </DataTemplate>
 
+        <DataTemplate
+            DataType="{x:Type villainVM:VillianResultViewModel}">
+            <Border BorderBrush="Black" BorderThickness="3" CornerRadius="5"
+Margin="10,5" x:Name="brd"
+Background="White">
+
+                <StackPanel Orientation="Vertical" Margin="0,5,0,5">
+
+                    <StackPanel  Orientation="Horizontal" Style="{StaticResource VoterStack}">
+                        <TextBlock Text="{Binding ShowNumber, UpdateSourceTrigger=PropertyChanged, StringFormat=№{0})}"/>
+
+                        <Rectangle Fill="Black" Width="1" Margin="10,1,10,1"/>
+
+                        <StackPanel Orientation="Vertical">
+
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <Label Content="Surename:"/>
+                                <TextBox x:Name="surenameTxtbx" 
+                     Style="{StaticResource TxtBoxInputStyle}" ToolTip="Enter Voter's Surename">
+                                    <TextBox.Text>
+                                        <Binding Path="Surename" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <Label Content="Heigth:"/>
+                                <TextBox x:Name="heightTxtbx" 
+                     Style="{StaticResource TxtBoxInputStyle}" ToolTip="Enter Voter's Name">
+                                    <TextBox.Text>
+                                        <Binding Path="Height" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <Label Content="Head Width:"/>
+                                <TextBox x:Name="headWidthTxtbx" 
+                     Style="{StaticResource TxtBoxInputStyle}" ToolTip="Enter Voter's Lastname">
+                                    <TextBox.Text>
+                                        <Binding Path="HeadWidth" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+
+                        </StackPanel>
+
+                        <Rectangle Fill="Black" Width="1" Margin="10,1,10,1"/>
+
+                        <StackPanel Orientation="Vertical">
+
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <Label Content="Head Height:"/>
+                                <TextBox x:Name="headHeightTxtbx"
+                     Style="{StaticResource TxtBoxInputStyle}" ToolTip="Enter Voter's County Number">
+                                    <TextBox.Text>
+                                        <Binding Path="HeadHeight" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <Label Content="Arm Length:"/>
+                                <TextBox x:Name="armLengthTxtbx" 
+                     Style="{StaticResource TxtBoxInputStyle}" ToolTip="Enter Voter's Party">
+                                    <TextBox.Text>
+                                        <Binding Path="ArmLength" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <Label Content="Eye Distance:"/>
+                                <TextBox x:Name="eyeDistanceTxtbx"
+                     Style="{StaticResource TxtBoxInputStyle}" ToolTip="Enter Voter's Age">
+                                    <TextBox.Text>
+                                        <Binding Path="EyeDistance" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+
+                        </StackPanel>
+
+                        <Rectangle Fill="Black" Width="1" Margin="10,1,10,1"/>
+
+                        <StackPanel Orientation="Vertical">
+                          
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <TextBlock
+                        Text="{Binding Deviation,
+                        UpdateSourceTrigger=PropertyChanged
+                        ,StringFormat=Deviation_Calculated: {0:#,#.000}}"
+                        FontSize="20"
+                     />
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
         <!--#endregion-->
 
         <!--#endregion-->

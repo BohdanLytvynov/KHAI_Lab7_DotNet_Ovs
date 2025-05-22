@@ -46,8 +46,6 @@ namespace VillainSearcher.ViewModels
         private Task m_SearchTask;
 
         private bool m_searching;
-
-        private string m_output;
         #endregion
 
         #region Properties
@@ -106,12 +104,6 @@ namespace VillainSearcher.ViewModels
             {
                 Set(ref m_Threshold, value);
             }
-        }
-
-        public string Output 
-        {
-            get=> m_output;
-            set=>Set(ref m_output, value);
         }
 
         #endregion
@@ -180,7 +172,7 @@ namespace VillainSearcher.ViewModels
 
             m_SelectedVillainIndex = -1;
 
-            m_Threshold = 0;
+            m_Threshold = 20;
 
             m_InputValid = false;
 
@@ -194,7 +186,6 @@ namespace VillainSearcher.ViewModels
             m_ArmLength = string.Empty;
             m_EyeDistance = string.Empty;
 
-            m_output = string.Empty;
             #endregion
 
             #region Init Commands
@@ -235,41 +226,24 @@ namespace VillainSearcher.ViewModels
 
             var villainRef = m_mapper.Map<Villain>(villainViewModel);
 
-            if (SearchResult.Count > 0)
+            Dispatcher.Invoke(() =>
             {
-                Dispatcher.Invoke(() =>
-                {
-                    SearchResult.Clear();
-                });
-            }
-            
-            Dispatcher.Invoke(() => { Output = string.Empty;  });
+                SearchResult.Clear();
+            });
 
-            StringBuilder stringBuilder = new StringBuilder();
-
-            stringBuilder.AppendLine("Output:");
-            int i = 1;
             foreach (var villain in villains)
             {
                 var deviation = m_villainDeviationCalculator.GetDeviationPercentage(villainRef, villain);
 
                 if (deviation <= Threshold)
                 {
+                    var temp = m_mapper.Map<VillianResultViewModel>(villain);
+                    temp.Deviation = deviation;
                     Dispatcher.Invoke(() =>
                     {
-                        SearchResult.Add(m_mapper.Map<VillainViewModel>(villain));
+                        SearchResult.Add(temp);
                     });
                 }
-
-                stringBuilder.AppendLine($"\t{i}) {villain.Surename}, deviation: {deviation}\n");
-
-                Dispatcher.Invoke(() =>
-                {
-                    Output += stringBuilder.ToString();
-                });
-
-                stringBuilder.Clear();
-                ++i;
             }
 
             if (SearchResult.Count == 0)
